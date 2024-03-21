@@ -32,10 +32,19 @@ def dicom_scan(InputPath, OutputPath=None, Compression=None):
             patients_df = pd.concat(frames, ignore_index=True)
         except:
             continue
-    print(patients_df.head())
-    print(counter)
+    patients_df = patients_df.drop_duplicates()
+    patients_df.reset_index(drop=True,inplace=True)
+    print(patients_df)
+    print("Number of records: " +str(counter))
     end = time.time()
     elapsed_time = end - start
-    print(elapsed_time)
-    print(filesize)
+    print("Elapsed time: " +str(elapsed_time))
+    filesize_mb = filesize/(1024*1024)
+    if filesize_mb>1024:
+        filesize = filesize_mb/1024
+        print('Files size in GB: ' + str(filesize))
+    else:
+        filesize = filesize_mb
+        print('File size in MB: ' + str(filesize))
+
 dicom_scan(path)
