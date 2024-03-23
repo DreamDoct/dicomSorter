@@ -72,8 +72,8 @@ def dicom_scan(InputPath, OutputPath=None, Compression=None):
         old_name = str(directories_df.loc[i, 'Path'])
         dirPatientName = directories_df.loc[i, 'PatientName']
         dirStudyDate = directories_df.loc[i, 'StudyDate']
-        dir_Study_Date = datetime.strptime(dirStudyDate, '%Y%m%d').strftime('%Y/%m/%d')
-        new_name = str(output_path + "\\" + dirPatientName + " " + dir_Study_Date)
+
+        new_name = str(output_path + "\\" + dirPatientName + " " + dirStudyDate)
         shutil.move(old_name, new_name)
 
 
